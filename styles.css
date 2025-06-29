@@ -69,16 +69,17 @@ a{
     padding: 2em;
     background-color: #07374a;
     border-radius: 10px;
+    margin-bottom: 2em;
 }
 .segundo-contenedor h1{
     font-family: 'roboto condensed';
     color: #00ABE4;
-    font-size: 4em;
-    margin-left: 2em;
+    font-size: 3em;
+    
 }
 
 .skills{
-    background-color: #00ABE4;
+    background-color: #0490c4;
     border-radius: 10px;
     height: 50vh;
     padding: 1em;
@@ -89,7 +90,7 @@ a{
     font-family: 'anzicar serif';
     font-size: 3em;
     color: #E9F1FA; 
-    display: inline-block;
+
     align-items: center;
 }
 
@@ -97,7 +98,7 @@ a{
     padding: 25px 30px;
 }
 .skills-bar .bar{
-    margin: 25px 0;
+    margin: 35px 0;
 }
 
 .skills-bar .bar .info span{
@@ -192,8 +193,18 @@ a{
     content: "60%";
 }
 
-
-
+.tercer-contenedor{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 30em;
+    justify-content: center;
+    align-items: center;
+    background-color: #034964;
+    padding: 2em;
+    border-radius: 10px;
+    
+}
 
 
 
