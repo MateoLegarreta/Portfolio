@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ancizar+Serif:wght@300..900&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Libertinus+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@100..900&display=swap" rel="stylesheet">
+    <title>Galería de Fotos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #00ABE4;
+            font-family: 'Montserrat', sans-serif;
+            padding-top: 80px;
+        }
+
+        /* Estilos para el nav */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #0490c4;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: white;
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-color: white;
+        }
+
+        /* Título de la galería */
+        .galeria-titulo {
+            text-align: center;
+            padding: 2rem 0;
+            color: white;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 1rem;
+        }
+
+        /* Estilos para la galería - EXACTAMENTE 3 POR FILA */
+        .galeria {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 0 2rem 2rem 2rem;
+            padding: 1rem;
+        }
+
+        .galeria div {
+            background-color: #07374a;
+            height: 250px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .galeria div:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            background-color: #0c5b7a;
+            cursor: pointer;
+        }
+
+        .galeria img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .galeria div:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Estilos para el lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-img {
+            max-width: 90vw;
+            max-height: 80vh;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Estilos para los botones del lightbox */
+        .lightbox-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 2100;
+            padding: 15px 20px;
+            cursor: pointer;
+            background: rgba(4, 144, 196, 0.8);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .lightbox-btn:hover {
+            background: rgba(4, 144, 196, 1);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .lightbox-btn.prev {
+            left: 3vw;
+        }
+
+        .lightbox-btn.next {
+            right: 3vw;
+        }
+
+        /* Botón cerrar */
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            font-size: 30px;
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .lightbox-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        /* Contador de imágenes */
+        .image-counter {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 16px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                gap: 15px;
+            }
+            
+            .nav-link {
+                font-size: 14px;
+                padding: 8px 15px;
+            }
+            
+            .galeria {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+                margin: 0 1rem 1rem 1rem;
+            }
+            
+            .galeria div {
+                height: 200px;
+            }
+            
+            .galeria-titulo {
+                font-size: 2rem;
+                padding: 1rem 0;
+            }
+            
+            .lightbox-btn {
+                padding: 10px 15px;
+                font-size: 16px;
+            }
+            
+            .lightbox-btn.prev {
+                left: 2vw;
+            }
+            
+            .lightbox-btn.next {
+                right: 2vw;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .galeria {
+                grid-template-columns: 1fr;
+                margin: 0 0.5rem 0.5rem 0.5rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px;
+            }
+            
+            body {
+                padding-top: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="nav-link">INICIO</a>
+            <a href="botonera.html" class="nav-link">BOTONERA DE SONIDOS</a>
+            <a href="galeria.html" class="nav-link active">GALERÍA DE FOTOS</a>
+            <a href="#configuracion" class="nav-link">CONFIGURACIÓN</a>
+            <a href="#ayuda" class="nav-link">AYUDA</a>
+        </div>
+    </nav>
+
+    <h1 class="galeria-titulo">Galería de Fotos</h1>
+
+    <!-- Galería -->
+    <section class="galeria"></section>
+
+    <!-- Lightbox -->
+    <div class="lightbox">
+        <button class="lightbox-close">&times;</button>
+        <button class="lightbox-btn prev">❮ Anterior</button>
+        <img src="/placeholder.svg" alt="Imagen ampliada" class="lightbox-img">
+        <button class="lightbox-btn next">Siguiente ❯</button>
+        <div class="image-counter">
+            <span id="current-image">1</span> / <span id="total-images">9</span>
+        </div>
+    </div>
+
+    <script>
+        let currentIndex = 0;
+
+        // Cargar imágenes en la galería
+        const totalImagenes = 9;
+        const galeria = document.querySelector('.galeria');
+        
+        for (let i = 1; i <= totalImagenes; i++) {
+            const div = document.createElement('div');
+            const img = document.createElement('img');
+            img.src = `imagenes/img${i}.jpeg`;
+            img.alt = `Imagen ${i}`;
+            img.loading = 'lazy';
+            div.appendChild(img);
+            galeria.appendChild(div);
+        }
+
+        // Actualizar contador total
+        document.getElementById('total-images').textContent = totalImagenes;
+
+        // Lógica del lightbox
+        const lightbox = document.querySelector('.lightbox');
+        const lightboxImg = document.querySelector('.lightbox-img');
+        const currentImageSpan = document.getElementById('current-image');
+
+        // Obtener todas las imágenes de la galería
+        function getImagenes() {
+            return Array.from(document.querySelectorAll('.galeria img'));
+        }
+
+        // Mostrar imagen en lightbox por índice
+        function mostrarImagen(idx) {
+            const imagenes = getImagenes();
+            currentIndex = (idx + imagenes.length) % imagenes.length;
+            lightboxImg.src = imagenes[currentIndex].src;
+            currentImageSpan.textContent = currentIndex + 1;
+        }
+
+        // Abrir lightbox
+        galeria.addEventListener('click', function (e) {
+            if (e.target.tagName === 'IMG') {
+                const imagenes = getImagenes();
+                currentIndex = imagenes.indexOf(e.target);
+                mostrarImagen(currentIndex);
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        });
+
+        // Cerrar lightbox
+        function cerrarLightbox() {
+            lightbox.classList.remove('active');
+            lightboxImg.src = '';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Cerrar con botón X
+        document.querySelector('.lightbox-close').addEventListener('click', function(e) {
+            e.stopPropagation();
+            cerrarLightbox();
+        });
+
+        // Cerrar al hacer clic en el fondo (no en la imagen)
+        lightbox.addEventListener('click', function (e) {
+            if (e.target === lightbox) {
+                cerrarLightbox();
+            }
+        });
+
+        // Navegación con botones - CORREGIDA
+        const prevBtn = document.querySelector('.lightbox-btn.prev');
+        const nextBtn = document.querySelector('.lightbox-btn.next');
+
+        prevBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            mostrarImagen(currentIndex - 1);
+        });
+
+        nextBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            mostrarImagen(currentIndex + 1);
+        });
+
+        // Navegación con teclado
+        document.addEventListener('keydown', function(e) {
+            if (lightbox.classList.contains('active')) {
+                switch(e.key) {
+                    case 'Escape':
+                        cerrarLightbox();
+                        break;
+                    case 'ArrowLeft':
+                        mostrarImagen(currentIndex - 1);
+                        break;
+                    case 'ArrowRight':
+                        mostrarImagen(currentIndex + 1);
+                        break;
+                }
+            }
+        });
+
+        // Navegación del nav
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (this.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                }
+                navLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

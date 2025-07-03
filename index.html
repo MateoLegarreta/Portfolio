@@ -14,69 +14,143 @@
    
 </head>
 <body>
-    
-    <div class="contenedor-principal">
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="nav-link active">INICIO</a>
+            <a href="botonera.html" class="nav-link">BOTONERA DE SONIDOS</a>
+            <a href="galeria.html" class="nav-link">GALERÍA DE FOTOS</a>
+            <a href="#configuracion" class="nav-link">CONFIGURACIÓN</a>
+            <a href="#ayuda" class="nav-link">AYUDA</a>
+        </div>
+    </nav>
 
+    <div class="contenedor-principal">
         <div class="primer-contenedor">
             <h1>Soy Mateo Legarreta</h1>
-            <h2>Estudiante universitario</h2>
-            <img src="imagenes/yo.jpg" alt="ese soy yo" class="imagen">
-            <h1>Sobre mi</h1>
+            <h2>Estudiante Universitario</h2>
+            <img src="imagenes/yo.jpg" alt="Mateo Legarreta" class="imagen">
+            <h1 style="font-size: 2.5em; margin-top: 1em;">Sobre Mí</h1>
             <p>
+                <i class="fas fa-graduation-cap" style="margin-right: 10px;"></i>
                 Soy un estudiante de la carrera Tecnicatura en Desarrollo de Software. <br>
+                <i class="fas fa-code" style="margin-right: 10px;"></i>
                 Me gusta la tecnología y la programación. <br>
+                <i class="fas fa-rocket" style="margin-right: 10px;"></i>
                 Estudio esta carrera para poder seguir desarrollándome como futuro profesional.
             </p>
         </div>
         
         <div class="segundo-contenedor">
             <div class="skills">
-                <h1 >Conocimiento sobre la programacion</h1>
+                <h1>Conocimientos en Programación</h1>
                 <div class="skills-bar">
-
                     <div class="bar">
                         <div class="info">
-                            <span>HTML <i class="fa-brands fa-html5"></i></span>
+                            <span>HTML <i class="fab fa-html5"></i></span>
                         </div>
                         <div class="progress-line">
                             <span class="html"></span>
                         </div>
                     </div>
-
                     <div class="bar">
                         <div class="info">
-                            <span>CSS <i class="fa-brands fa-css3-alt"></i></span>
+                            <span>CSS <i class="fab fa-css3-alt"></i></span>
                         </div>
                         <div class="progress-line">
                             <span class="css"></span>
                         </div>
                     </div>
-
                     <div class="bar">
                         <div class="info">
-                            <span>C++ <i class="fa-brands fa-css3-alt"></i></span>
+                            <span>C++ <i class="fas fa-code"></i></span>
                         </div>
                         <div class="progress-line">
                             <span class="c"></span>
                         </div>
                     </div>
-
                     <div class="bar">
                         <div class="info">
-                            <span>Python <i class="fa-brands fa-python"></i></span>
+                            <span>Python <i class="fab fa-python"></i></span>
                         </div>
                         <div class="progress-line">
                             <span class="python"></span>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
         
         <div class="tercer-contenedor">
-
+            <h2><i class="fas fa-project-diagram" style="margin-right: 15px;"></i>Mis Proyectos con Java</h2>
+            <div class="contenedor-cajas">
+                <div class="caja-leermas">
+                    <h3 style="color: white; margin-bottom: 1em; font-size: 1.3em;">
+                        <i class="fas fa-music" style="margin-right: 10px;"></i>Botonera de Sonidos
+                    </h3>
+                    <a href="botonera.html">
+                        <button class="btn-leer">Ver Proyecto</button>
+                    </a>
+                </div>
+                
+                <div class="caja-leermas">
+                    <h3 style="color: white; margin-bottom: 1em; font-size: 1.3em;">
+                        <i class="fas fa-images" style="margin-right: 10px;"></i>Galería de Fotos
+                    </h3>
+                    <a href="galeria.html">
+                        <button class="btn-leer">Ver Proyecto</button>
+                    </a>
+                </div>
+                
+                <div class="caja-leermas">
+                    <h3 style="color: white; margin-bottom: 1em; font-size: 1.3em;">
+                        <i class="fas fa-compact-disc" style="margin-right: 10px;"></i>Discografía
+                    </h3>
+                    <a href="discografia.html">
+                        <button class="btn-leer">Ver Proyecto</button>
+                    </a>
+                </div>
+                
+                <div class="caja-leermas">
+                    <h3 style="color: white; margin-bottom: 1em; font-size: 1.3em;">
+                        <i class="fas fa-star" style="margin-right: 10px;"></i>Temas Imprescindibles
+                    </h3>
+                    <a href="temasimprescindibles.html">
+                        <button class="btn-leer">Ver Proyecto</button>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
+
+    <script>
+        // Navegación
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (this.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                }
+                navLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Animación de entrada
+        window.addEventListener('load', function() {
+            const elementos = document.querySelectorAll('.primer-contenedor, .segundo-contenedor, .tercer-contenedor');
+            elementos.forEach((elemento, index) => {
+                setTimeout(() => {
+                    elemento.style.opacity = '0';
+                    elemento.style.transform = 'translateY(50px)';
+                    elemento.style.transition = 'all 0.6s ease';
+                    
+                    setTimeout(() => {
+                        elemento.style.opacity = '1';
+                        elemento.style.transform = 'translateY(0)';
+                    }, 100);
+                }, index * 200);
+            });
+        });
+    </script>
 </body>
 </html>

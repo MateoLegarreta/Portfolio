@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ancizar+Serif:wght@300..900&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Libertinus+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@100..900&display=swap" rel="stylesheet">
+    <title>Botonera de Sonidos</title>
+    <style>
+        <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .botonera {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            width: 300px;
+        }
+
+        .boton-sonido {
+            padding: 15px 25px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .boton-sonido:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .boton-sonido:active {
+            transform: translateY(1px);
+        }
+
+        #boton1 {
+            background-color: #ff6b6b;
+            color: white;
+        }
+
+        #boton2 {
+            background-color: #48dbfb;
+            color: white;
+        }
+
+        #boton3 {
+            background-color: #1dd1a1;
+            color: white;
+        }
+
+        #boton4 {
+            background-color: #feca57;
+            color: white;
+        }
+    </style>
+
+
+
+
+</style>
+        
+</head>
+
+<body>
+     <nav>
+        <div class="nav-container">
+            <a href="index.html" class="nav-link active">INICIO</a>
+            <a href="botonera.html" class="nav-link">BOTONERA DE SONIDOS</a>
+            <a href="galeria.html" class="nav-link">GALERIA DE FOTOS</a>
+            <a href="#configuracion" class="nav-link">CONFIGURACIÓN</a>
+            <a href="#ayuda" class="nav-link">AYUDA</a>
+        </div>
+    </nav>
+    <h1>Botonera de Sonidos</h1>
+    <div class="botonera">
+        <button id="boton1" class="boton-sonido">Sonido 1</button>
+        <button id="boton2" class="boton-sonido">Sonido 2</button>
+        <button id="boton3" class="boton-sonido">Sonido 3</button>
+        <button id="boton4" class="boton-sonido">Sonido 4</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Crear elementos de audio
+            const audio1 = new Audio('sonidos/sonido1.ogg');
+            const audio2 = new Audio('sonidos/sonido2.ogg');
+            const audio3 = new Audio('sonidos/sonido3.ogg');
+            const audio4 = new Audio('sonidos/sonido4.ogg');
+
+
+            // Obtener referencias a los botones
+            const boton1 = document.getElementById('boton1');
+            const boton2 = document.getElementById('boton2');
+            const boton3 = document.getElementById('boton3');
+            const boton4 = document.getElementById('boton4');
+
+
+            // Asignar eventos a los botones usando un bucle
+            const audios = [audio1, audio2, audio3, audio4];
+            const botonesArr = [boton1, boton2, boton3, boton4];
+
+            botonesArr.forEach((boton, i) => {
+                boton.addEventListener('click', function () {
+                    audios[i].currentTime = 0;
+                    audios[i].play();
+                });
+            });
+
+
+            // Opcional: agregar efecto visual al presionar
+            const botones = document.querySelectorAll('.boton-sonido');
+            botones.forEach(boton => {
+                boton.addEventListener('mousedown', function () {
+                    this.style.opacity = '0.8';
+                });
+
+                boton.addEventListener('mouseup', function () {
+                    this.style.opacity = '1';
+                });
+
+                boton.addEventListener('mouseleave', function () {
+                    this.style.opacity = '1';
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
