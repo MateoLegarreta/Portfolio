@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@100..900&display=swap" rel="stylesheet">
     <title>Botonera de Sonidos</title>
     <style>
-        <style>
+        
         body {
             font-family: Arial, sans-serif;
             display: flex;
@@ -104,21 +104,20 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Crear elementos de audio
+            
             const audio1 = new Audio('sonidos/sonido1.ogg');
             const audio2 = new Audio('sonidos/sonido2.ogg');
             const audio3 = new Audio('sonidos/sonido3.ogg');
             const audio4 = new Audio('sonidos/sonido4.ogg');
 
 
-            // Obtener referencias a los botones
+            
             const boton1 = document.getElementById('boton1');
             const boton2 = document.getElementById('boton2');
             const boton3 = document.getElementById('boton3');
             const boton4 = document.getElementById('boton4');
 
 
-            // Asignar eventos a los botones usando un bucle
             const audios = [audio1, audio2, audio3, audio4];
             const botonesArr = [boton1, boton2, boton3, boton4];
 
@@ -130,7 +129,6 @@
             });
 
 
-            // Opcional: agregar efecto visual al presionar
             const botones = document.querySelectorAll('.boton-sonido');
             botones.forEach(boton => {
                 boton.addEventListener('mousedown', function () {
