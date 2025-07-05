@@ -280,6 +280,7 @@ nav {
 .progress-line .css { width: 50%; }
 .progress-line .c { width: 70%; }
 .progress-line .python { width: 60%; }
+.progress-line .javascript { width: 60%; }
 
 .bar .progress-line span::after {
     position: absolute;
@@ -297,6 +298,7 @@ nav {
 .progress-line .css::after { content: "50%"; }
 .progress-line .c::after { content: "70%"; }
 .progress-line .python::after { content: "60%"; }
+.progress-line .javascript::after { content: "60%"; }
 
 /* ===== TERCER CONTENEDOR - PROYECTOS ===== */
 .tercer-contenedor {
