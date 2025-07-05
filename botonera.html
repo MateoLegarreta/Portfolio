@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,111 +11,39 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@100..900&display=swap" rel="stylesheet">
     <title>Botonera de Sonidos</title>
-    <style>
-        
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-        }
-
-        h1 {
-            color: #333;
-            margin-bottom: 30px;
-        }
-
-        .botonera {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            width: 300px;
-        }
-
-        .boton-sonido {
-            padding: 15px 25px;
-            font-size: 18px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .boton-sonido:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        .boton-sonido:active {
-            transform: translateY(1px);
-        }
-
-        #boton1 {
-            background-color: #ff6b6b;
-            color: white;
-        }
-
-        #boton2 {
-            background-color: #48dbfb;
-            color: white;
-        }
-
-        #boton3 {
-            background-color: #1dd1a1;
-            color: white;
-        }
-
-        #boton4 {
-            background-color: #feca57;
-            color: white;
-        }
-    </style>
-
-
-
-
-</style>
-        
 </head>
-
 <body>
     <nav>
         <div class="nav-container">
             <a href="index.html" class="nav-link">INICIO</a>
-            <a href="botonera.html" class="nav-link">BOTONERA DE SONIDOS</a>
+            <a href="botonera.html" class="nav-link active">BOTONERA DE SONIDOS</a>
             <a href="galeria.html" class="nav-link">GALERÍA DE FOTOS</a>
-            <a href="calculadora.html" class="nav-link active">CALCULADORA</a>
+            <a href="calculadora.html" class="nav-link">CALCULADORA</a>
             <a href="index.html#contacto" class="nav-link">CONTACTO</a>
         </div>
     </nav>
-    <h1>Botonera de Sonidos</h1>
-    <div class="botonera">
-        <button id="boton1" class="boton-sonido">Sonido 1</button>
-        <button id="boton2" class="boton-sonido">Sonido 2</button>
-        <button id="boton3" class="boton-sonido">Sonido 3</button>
-        <button id="boton4" class="boton-sonido">Sonido 4</button>
+
+    <div class="botonera-container">
+        <h1>Botonera de Sonidos</h1>
+        <div class="botonera">
+            <button id="boton1" class="boton-sonido">Sonido 1</button>
+            <button id="boton2" class="boton-sonido">Sonido 2</button>
+            <button id="boton3" class="boton-sonido">Sonido 3</button>
+            <button id="boton4" class="boton-sonido">Sonido 4</button>
+        </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            
             const audio1 = new Audio('sonidos/sonido1.ogg');
             const audio2 = new Audio('sonidos/sonido2.ogg');
             const audio3 = new Audio('sonidos/sonido3.ogg');
             const audio4 = new Audio('sonidos/sonido4.ogg');
 
-
-            
             const boton1 = document.getElementById('boton1');
             const boton2 = document.getElementById('boton2');
             const boton3 = document.getElementById('boton3');
             const boton4 = document.getElementById('boton4');
-
 
             const audios = [audio1, audio2, audio3, audio4];
             const botonesArr = [boton1, boton2, boton3, boton4];
@@ -127,7 +54,6 @@
                     audios[i].play();
                 });
             });
-
 
             const botones = document.querySelectorAll('.boton-sonido');
             botones.forEach(boton => {
@@ -144,7 +70,18 @@
                 });
             });
         });
+
+        // Navegación activa
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (this.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                }
+                navLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
     </script>
 </body>
-
 </html>

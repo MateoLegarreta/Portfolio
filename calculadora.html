@@ -4,325 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora - Mateo Legarreta</title>
+    <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ancizar+Serif:wght@300..900&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Libertinus+Mono&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@100..900&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: #E9F1FA;
-            padding-top: 80px;
-            min-height: 100vh;
-        }
-
-        /* Navegación */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: #0490c4;
-            padding: 15px 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 25px;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            flex-wrap: nowrap;
-        }
-
-        .nav-link {
-            color: white;
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            padding: 8px 15px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            white-space: nowrap;
-        }
-
-        .nav-link:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            border-color: white;
-            transform: translateY(-2px);
-        }
-
-        .nav-link.active {
-            background-color: rgba(255, 255, 255, 0.2);
-            border-color: white;
-        }
-
-        /* Contenedor principal */
-        .contenedor-principal {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            justify-content: center;
-            align-items: center;
-            background-color: #E9F1FA;
-            padding: 2em;
-            gap: 2em;
-        }
-
-        /* Header de la calculadora */
-        .header-calculadora {
-            width: 100%;
-            max-width: 1000px;
-            background: linear-gradient(135deg, #00ABE4, #0490c4);
-            padding: 2em;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .header-calculadora::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
-        }
-
-        .header-calculadora > * {
-            position: relative;
-            z-index: 2;
-        }
-
-        .header-calculadora h1 {
-            font-family: 'Ancizar Serif', serif;
-            font-size: 3em;
-            color: #E9F1FA;
-            margin-bottom: 0.5em;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .header-calculadora p {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.2em;
-            color: rgba(233, 241, 250, 0.9);
-            line-height: 1.6;
-        }
-
-        /* Contenedor de la calculadora */
-        .contenedor-calculadora {
-            width: 100%;
-            max-width: 1000px;
-            background: linear-gradient(135deg, #034964, #07374a);
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-            padding: 3em 2em;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .calculadora {
-            background: linear-gradient(135deg, #0490c4, #00ABE4);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            padding: 30px;
-            width: 100%;
-            max-width: 400px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .calculadora::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transition: left 0.5s;
-        }
-
-        .calculadora:hover::before {
-            left: 100%;
-        }
-
-        .calculadora > * {
-            position: relative;
-            z-index: 2;
-        }
-
-        .titulo-calc {
-            color: #E9F1FA;
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 25px;
-            font-family: 'Roboto Condensed', sans-serif;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .display {
-            background: #07374a;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
-            min-height: 70px;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.3);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .display-texto {
-            color: #E9F1FA;
-            font-size: 32px;
-            font-family: 'Libertinus Mono', monospace;
-            word-break: break-all;
-            text-align: right;
-            text-shadow: 0 0 10px rgba(233, 241, 250, 0.5);
-        }
-
-        .botones {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-        }
-
-        .boton {
-            border: none;
-            border-radius: 12px;
-            font-size: 20px;
-            font-weight: bold;
-            height: 65px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            outline: none;
-            font-family: 'Montserrat', sans-serif;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .boton::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.3s, height 0.3s;
-        }
-
-        .boton:active::before {
-            width: 100px;
-            height: 100px;
-        }
-
-        .boton:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .boton:active {
-            transform: translateY(0);
-        }
-
-        .numero {
-            background: linear-gradient(135deg, #E9F1FA, #ffffff);
-            color: #034964;
-            border: 2px solid rgba(4, 144, 196, 0.3);
-        }
-
-        .numero:hover {
-            background: linear-gradient(135deg, #ffffff, #E9F1FA);
-            border-color: #0490c4;
-        }
-
-        .operador {
-            background: linear-gradient(135deg, #00ABE4, #0490c4);
-            color: #E9F1FA;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .operador:hover {
-            background: linear-gradient(135deg, #0490c4, #00ABE4);
-            border-color: white;
-            box-shadow: 0 0 20px rgba(0, 171, 228, 0.5);
-        }
-
-        .limpiar {
-            background: linear-gradient(135deg, #07374a, #034964);
-            color: #E9F1FA;
-            grid-column: span 2;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .limpiar:hover {
-            background: linear-gradient(135deg, #034964, #07374a);
-            border-color: white;
-            box-shadow: 0 0 20px rgba(7, 55, 74, 0.5);
-        }
-
-        .igual {
-            background: linear-gradient(135deg, #00ABE4, #0490c4);
-            color: #E9F1FA;
-            grid-row: span 2;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .igual:hover {
-            background: linear-gradient(135deg, #0490c4, #00ABE4);
-            border-color: white;
-            box-shadow: 0 0 25px rgba(0, 171, 228, 0.6);
-        }
-
-        .cero {
-            grid-column: span 2;
-        }
-
-        .instrucciones {
-            margin-top: 25px;
-            text-align: center;
-            color: rgba(233, 241, 250, 0.8);
-            font-size: 14px;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .instrucciones p {
-            margin-bottom: 5px;
-        }
-
-      
-    </style>
 </head>
 <body>
     <nav>
@@ -336,7 +24,6 @@
     </nav>
 
     <div class="contenedor-principal">
-      
         <div class="contenedor-calculadora">
             <div class="calculadora">
                 <h2 class="titulo-calc">Calculadora</h2>
@@ -384,7 +71,6 @@
         </div>
     </div>
 
- 
     <script>
         let display = document.getElementById('display');
         let valorActual = '0';
@@ -512,7 +198,7 @@
 
         // Animación de entrada
         window.addEventListener('load', function() {
-            const elementos = document.querySelectorAll('.header-calculadora, .contenedor-calculadora');
+            const elementos = document.querySelectorAll('.contenedor-calculadora');
             elementos.forEach((elemento, index) => {
                 elemento.style.opacity = '0';
                 elemento.style.transform = 'translateY(50px)';
