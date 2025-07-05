@@ -172,71 +172,16 @@
             backdrop-filter: blur(10px);
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-container {
-                gap: 15px;
-            }
-            
-            .nav-link {
-                font-size: 14px;
-                padding: 8px 15px;
-            }
-            
-            .galeria {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
-                margin: 0 1rem 1rem 1rem;
-            }
-            
-            .galeria div {
-                height: 200px;
-            }
-            
-            .galeria-titulo {
-                font-size: 2rem;
-                padding: 1rem 0;
-            }
-            
-            .lightbox-btn {
-                padding: 10px 15px;
-                font-size: 16px;
-            }
-            
-            .lightbox-btn.prev {
-                left: 2vw;
-            }
-            
-            .lightbox-btn.next {
-                right: 2vw;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .galeria {
-                grid-template-columns: 1fr;
-                margin: 0 0.5rem 0.5rem 0.5rem;
-            }
-            
-            .nav-container {
-                flex-direction: column;
-                gap: 10px;
-                padding: 10px;
-            }
-            
-            body {
-                padding-top: 120px;
-            }
-        }
-    </style>
+     </style>
 </head>
 <body>
-    <nav>
+        <nav>
         <div class="nav-container">
             <a href="index.html" class="nav-link">INICIO</a>
             <a href="botonera.html" class="nav-link">BOTONERA DE SONIDOS</a>
-            <a href="galeria.html" class="nav-link active">GALERÍA DE FOTOS</a>
-            <a href="index.html" class="nav-link">CONTACTO</a>
+            <a href="galeria.html" class="nav-link">GALERÍA DE FOTOS</a>
+            <a href="calculadora.html" class="nav-link active">CALCULADORA</a>
+            <a href="index.html#contacto" class="nav-link">CONTACTO</a>
         </div>
     </nav>
 
