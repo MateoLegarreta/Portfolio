@@ -174,7 +174,7 @@
     </div>
 
     <script>
-        // Prevenir el salto automático del navegador cuando hay hash
+       
         if (window.location.hash) {
             const hash = window.location.hash;
             history.replaceState(null, null, window.location.pathname);
@@ -196,7 +196,7 @@
             });
         }
 
-        // Navegación y scroll suave
+        
         document.addEventListener('DOMContentLoaded', function() {
             const navLinks = document.querySelectorAll('.nav-link');
             
@@ -227,7 +227,6 @@
             });
         });
 
-        // Animaciones de entrada
         window.addEventListener('load', function() {
             const elementos = document.querySelectorAll('.primer-contenedor, .segundo-contenedor, .tercer-contenedor, .cuarto-contenedor');
             elementos.forEach((elemento, index) => {
@@ -244,7 +243,7 @@
             });
         });
 
-        // Actualizar enlace activo basado en scroll
+        
         window.addEventListener('scroll', function() {
             const sections = document.querySelectorAll('[id]');
             const navLinks = document.querySelectorAll('.nav-link');
