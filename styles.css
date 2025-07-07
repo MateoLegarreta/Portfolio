@@ -340,6 +340,12 @@ nav {
     flex-direction: column;
     justify-content: center;
 }
+#caja-calculadora{
+    grid-column: span 2;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
 
 .caja-leermas::before {
     content: '';
